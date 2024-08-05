@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
    let gravity = 0.9
    let isJumping = false
    let isGameOver = false
-   let isgao = false
    function control(e) {
       if (e.code === "Space"|| e.code === "ArrowUp"|| e.code === "w") {
         if (!isJumping) {
