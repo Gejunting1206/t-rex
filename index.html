@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/app.js"></script>
+  <script>
+    function again() {
+       window.location.assign("./index.html")
+   }
+  </script>
+</head>
+<body>
+  <button onclick="again()" style="width: 50px;height: 50px">
+    <img src="./images/restart.png" width="30px" height="30px" alt="">
+  </button>
+  <div id="desert">
+    <h2 id="alert"></h2>
+    <div class="grid">
+      <div class="dino"></div>
+    </div>
+  </div>
+</body>
+</html>
