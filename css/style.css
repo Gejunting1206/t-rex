@@ -1,0 +1,40 @@
+body {
+  overflow: hidden;
+}
+@keyframes sliderigth {
+  from {
+    background-position: 70000%;
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+#desert {
+  position: absolute;
+  background-image: url(../images/t-rex-background.png);
+  height: 200px;
+  background-size: auto 200px;
+  width: 100%;
+  animation: sliderigth 600s infinite linear ;
+  bottom: 0;
+}
+
+.dino {
+  background-image: url(../images/t-rex.png);
+  width: 60px;
+  height: 60px;
+  background-size: 60px 60px;
+  position: absolute;
+  bottom: 0;
+}
+
+.obstacle {
+  background-image: url(../images/cacti.png);
+  width: 60px;
+  height: 60px;
+  background-size: 60px 60px;
+  position: absolute;
+  bottom: 0;
+}
+
