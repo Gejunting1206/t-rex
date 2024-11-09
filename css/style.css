@@ -1,5 +1,10 @@
 body {
   overflow: hidden;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 @keyframes sliderigth {
   from {
@@ -11,13 +16,15 @@ body {
 }
 
 #desert {
-  position: absolute;
+  position: relative;
   background-image: url(../images/t-rex-background.png);
   height: 200px;
   background-size: auto 200px;
   width: 100%;
-  animation: sliderigth 600s infinite linear ;
-  bottom: 0;
+  max-width: 1000px;
+  animation: sliderigth 600s infinite linear;
+  margin-top: auto;
+  margin-bottom: 20px;
 }
 
 .dino {
@@ -36,5 +43,37 @@ body {
   background-size: 60px 60px;
   position: absolute;
   bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  #desert {
+    height: 150px;
+    background-size: auto 150px;
+  }
+  
+  .dino, .obstacle {
+    width: 45px;
+    height: 45px;
+    background-size: 45px 45px;
+  }
+}
+
+#alert {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+}
+
+.restart-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
