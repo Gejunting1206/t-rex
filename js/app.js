@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isGameOver) {
        let randomTime = Math.random() * 500 + 600
     
-    let obstaclePosition = 1000 
+    let obstaclePosition = grid.offsetWidth
       const obstacle = document.createElement('div')
       obstacle.classList.add('obstacle')
       grid.appendChild(obstacle)
