@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="./css/style.css">
   <script src="./js/app.js"></script>
   <script>
     function again() {
        window.location.assign("./index.html")
-   }
+    }
   </script>
 </head>
 <body>
-  <button onclick="again()" style="width: 50px;height: 50px">
-    <img src="./images/restart.png" width="30px" height="30px" alt="">
+  <button onclick="again()" class="restart-btn">
+    <img src="./images/restart.png" width="30px" height="30px" alt="restart">
   </button>
   <div id="desert">
     <h2 id="alert"></h2>
