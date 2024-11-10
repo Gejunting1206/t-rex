@@ -1,20 +1,3 @@
-// 添加横屏检测函数
-function checkOrientation() {
-    if (window.innerWidth < 768) {  // 仅在移动设备上检查
-        if (window.innerHeight > window.innerWidth) {  // 竖屏
-            isGameOver = true;
-            document.getElementById('desert').style.display = 'none';
-        } else {  // 横屏
-            isGameOver = false;
-            document.getElementById('desert').style.display = 'block';
-            // 如果没有仙人掌，重新开始生成
-            if (!document.querySelector('.obstacle')) {
-                generateObstacles();
-            }
-        }
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
    const dino = document.querySelector('.dino')
    const grid = document.querySelector('.grid')
@@ -24,21 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
    let isGameOver = false
    let position = 0
    let fen = 0
-   let scoreInterval = null  // 添加分数计时器变量
-   let speed = 2;  // 初始速度
-   const maxSpeed = 8;  // 最大速度
-   const acceleration = 0.000005;  // 加速度
-
-   // 初始化横竖屏检测
-   checkOrientation();
-   window.addEventListener('orientationchange', () => {
-       setTimeout(checkOrientation, 100); // 添加延时以确保屏幕旋转完成
-   });
-   window.addEventListener('resize', checkOrientation);
+   let scoreInterval = null
+   let speed = 2;
+   const maxSpeed = 8;
+   const acceleration = 0.000005;
 
    function again() {
       window.location.assign("../index.html")
    }
+   
    function control(e) {
       if (e.code === "R" || e.code === "r"){
         again()
@@ -47,14 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
          jump()
         }
       }
-
    }
+
    function jump() {
     isJumping = true
     let count = 0
      let timerId = setInterval(function () {
-
-      // move down
       if (count === 15 ) {
         clearInterval(timerId)
         let downTimerId = setInterval(function () {
@@ -66,30 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
           count--
           position = position * gravity
           dino.style.bottom = position + 'px'
-        }, 20) // 下落速度
+        }, 20)
       }
-
-      // move up
       position += 30
       count++
       position = position * gravity
       dino.style.bottom = position + 'px'
-     },20)  // 上升速度
+     },20)
    }
+
    document.addEventListener('contextmenu',function(e){
-			e.preventDefault();
+      e.preventDefault();
    })
 
    function mouse_jump() {
-		if(!isJumping) {
-		    jump()
-		}
+      if(!isJumping) {
+          jump()
+      }
    }
 
    document.addEventListener('keydown', control)
    document.addEventListener('mousedown', mouse_jump)
 
-   // 添加分数更新函数
    function updateScore() {
        if (!isGameOver) {
            fen += 0.01;
@@ -97,10 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
        }
    }
 
-   // 开始计分
    scoreInterval = setInterval(updateScore, 20);
 
-   // 添加速度更新函数
    function updateSpeed() {
        if (!isGameOver && speed < maxSpeed) {
            speed += acceleration;
@@ -109,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
    function generateObstacles() {
     if (!isGameOver) {
-       // 随机时间也随速度调整，速度越快间隔越短
        let randomTime = Math.random() * (1000 - speed * 50) + (1000 - speed * 50)
     
        let obstaclePosition = grid.offsetWidth
@@ -133,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
              grid.removeChild(grid.lastChild)
            } 
          }
-         updateSpeed();  // 更新速度
-         obstaclePosition -= speed;  // 使用当前速度
+         updateSpeed();
+         obstaclePosition -= speed;
          obstacle.style.left = obstaclePosition + 'px'
        }, 5)
        
@@ -144,8 +114,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
    }
 
-   // 确保游戏开始时生成仙人掌
-   if (!isGameOver) {
-       generateObstacles();
-   }
+   generateObstacles();
 })
