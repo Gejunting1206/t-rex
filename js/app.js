@@ -100,24 +100,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     generateObstacles()
 
-    // 添加横屏检测
+    // 修改横屏检测函数
     function checkOrientation() {
-      if (window.innerWidth < 768) {  // 仅在移动设备上检查
-        if (window.innerHeight > window.innerWidth) {  // 竖屏
-          if (!isGameOver) {
-            isGameOver = true;  // 暂停游戏
-          }
-        } else {  // 横屏
-          if (isGameOver && document.querySelector('#orientation-message').style.display === 'flex') {
-            isGameOver = false;  // 恢复游戏
-            generateObstacles();
-          }
+        if (window.innerWidth < 768) {  // 仅在移动设备上检查
+            if (window.innerHeight > window.innerWidth) {  // 竖屏
+                isGameOver = true;  // 暂停游戏
+                grid.style.display = 'none';  // 隐藏游戏区域
+            } else {  // 横屏
+                isGameOver = false;  // 恢复游戏
+                grid.style.display = 'block';  // 显示游戏区域
+                // 如果游戏还没开始，则开始生成障碍物
+                if (!document.querySelector('.obstacle')) {
+                    generateObstacles();
+                }
+            }
         }
-      }
     }
 
-    // 监听屏幕旋转
-    window.addEventListener('resize', checkOrientation);
-    
-    checkOrientation();
+    // 添加页面加载完成后的初始检查
+    document.addEventListener('DOMContentLoaded', () => {
+        // ... 原有的 DOMContentLoaded 代码 ...
+        
+        // 添加初始横竖屏检查
+        checkOrientation();
+        
+        // 添加屏幕旋转监听
+        window.addEventListener('orientationchange', checkOrientation);
+        window.addEventListener('resize', checkOrientation);
+    });
 })
