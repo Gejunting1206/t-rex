@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
    let isGameOver = false
    let position = 0
    let fen = 0
+   let scoreInterval = null  // 添加分数计时器变量
+   let speed = 2;  // 初始速度
+   const maxSpeed = 8;  // 最大速度
+   const acceleration = 0.000005;  // 加速度
 
    // 初始化横竖屏检测
    checkOrientation();
@@ -84,10 +88,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
    document.addEventListener('keydown', control)
    document.addEventListener('mousedown', mouse_jump)
- 
+
+   // 添加分数更新函数
+   function updateScore() {
+       if (!isGameOver) {
+           fen += 0.01;
+           alert.innerHTML = '分数：' + fen.toFixed() + '分';
+       }
+   }
+
+   // 开始计分
+   scoreInterval = setInterval(updateScore, 20);
+
+   // 添加速度更新函数
+   function updateSpeed() {
+       if (!isGameOver && speed < maxSpeed) {
+           speed += acceleration;
+       }
+   }
+
    function generateObstacles() {
     if (!isGameOver) {
-       let randomTime = Math.random() * 400 + 800
+       // 随机时间也随速度调整，速度越快间隔越短
+       let randomTime = Math.random() * (1000 - speed * 50) + (1000 - speed * 50)
     
        let obstaclePosition = grid.offsetWidth
        const obstacle = document.createElement('div')
@@ -98,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
        let timerId = setInterval(function () {
          if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
            clearInterval(timerId)
+           clearInterval(scoreInterval)
            if (fen > window.localStorage.getItem('bestScore')) {
              alert.innerHTML = '游戏结束！新纪录：' + fen.toFixed() + '分'
              window.localStorage.setItem('bestScore', fen)
@@ -109,15 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
              grid.removeChild(grid.lastChild)
            } 
          }
-         obstaclePosition -= 3
-         if(isGameOver === false) {
-           fen += 0.008
-         }
-         if(isGameOver === false){
-             alert.innerHTML = '分数：' + fen.toFixed() + '分'
-         }
+         updateSpeed();  // 更新速度
+         obstaclePosition -= speed;  // 使用当前速度
          obstacle.style.left = obstaclePosition + 'px'
-       }, 10) // 移动速度
+       }, 5)
        
        if (!isGameOver) {
            setTimeout(generateObstacles, randomTime)
