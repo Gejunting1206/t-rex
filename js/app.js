@@ -97,4 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
     }
     generateObstacles()
+
+    // 添加横屏检测
+    function checkOrientation() {
+      if (window.innerWidth < 768) {  // 仅在移动设备上检查
+        if (window.innerHeight > window.innerWidth) {  // 竖屏
+          if (!isGameOver) {
+            isGameOver = true;  // 暂停游戏
+          }
+        } else {  // 横屏
+          if (isGameOver && document.querySelector('#orientation-message').style.display === 'flex') {
+            isGameOver = false;  // 恢复游戏
+            generateObstacles();
+          }
+        }
+      }
+    }
+
+    // 监听屏幕旋转
+    window.addEventListener('resize', checkOrientation);
+    
+    // 初始检查
+    checkOrientation();
 })
