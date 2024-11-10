@@ -77,3 +77,50 @@ body {
   padding: 5px;
 }
 
+/* 添加横屏提示样式 */
+#orientation-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 20px;
+}
+
+/* 在竖屏时显示提示 */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+  #orientation-message {
+    display: flex;
+  }
+  
+  #desert {
+    display: none;
+  }
+  
+  .restart-btn {
+    display: none;
+  }
+}
+
+/* 横屏模式的样式优化 */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  #desert {
+    height: 120px;
+    background-size: auto 120px;
+  }
+  
+  .dino, .obstacle {
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+  }
+}
+
