@@ -1,3 +1,20 @@
+// 添加横屏检测函数
+function checkOrientation() {
+    if (window.innerWidth < 768) {  // 仅在移动设备上检查
+        if (window.innerHeight > window.innerWidth) {  // 竖屏
+            isGameOver = true;
+            document.getElementById('desert').style.display = 'none';
+        } else {  // 横屏
+            isGameOver = false;
+            document.getElementById('desert').style.display = 'block';
+            // 如果没有仙人掌，重新开始生成
+            if (!document.querySelector('.obstacle')) {
+                generateObstacles();
+            }
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
    const dino = document.querySelector('.dino')
    const grid = document.querySelector('.grid')
@@ -5,6 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
    let gravity = 0.9
    let isJumping = false
    let isGameOver = false
+   let position = 0
+   let fen = 0
+
+   // 初始化横竖屏检测
+   checkOrientation();
+   window.addEventListener('orientationchange', () => {
+       setTimeout(checkOrientation, 100); // 添加延时以确保屏幕旋转完成
+   });
+   window.addEventListener('resize', checkOrientation);
+
    function again() {
       window.location.assign("../index.html")
    }
@@ -18,8 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
    }
-   let position = 0
-   let fen = 0
    function jump() {
     isJumping = true
     let count = 0
@@ -37,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
           count--
           position = position * gravity
           dino.style.bottom = position + 'px'
-        }, 20)
+        }, 20) // 下落速度
       }
 
       // move up
@@ -45,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       count++
       position = position * gravity
       dino.style.bottom = position + 'px'
-     },20)
+     },20)  // 上升速度
    }
    document.addEventListener('contextmenu',function(e){
 			e.preventDefault();
@@ -62,70 +87,46 @@ document.addEventListener('DOMContentLoaded', () => {
  
    function generateObstacles() {
     if (!isGameOver) {
-       let randomTime = Math.random() * 500 + 600
+       let randomTime = Math.random() * 400 + 800
     
-    let obstaclePosition = grid.offsetWidth
-      const obstacle = document.createElement('div')
-      obstacle.classList.add('obstacle')
-      grid.appendChild(obstacle)
-      obstacle.style.left = obstaclePosition + 'px'
+       let obstaclePosition = grid.offsetWidth
+       const obstacle = document.createElement('div')
+       obstacle.classList.add('obstacle')
+       grid.appendChild(obstacle)
+       obstacle.style.left = obstaclePosition + 'px'
 
-      let timerId = setInterval(function () {
-        if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
-          clearInterval(timerId)
-          if (fen > window.localStorage.getItem('bestScore')) {
-            alert.innerHTML = '游戏结束！新纪录：' + fen.toFixed() + '分'
-            window.localStorage.setItem('bestScore', fen)
-          }else {
-            alert.innerHTML = '游戏结束！分数：' + fen.toFixed() + '分'
-          }
-          isGameOver = true
-          // remove all children
-          while (grid.firstChild) {
-            grid.removeChild(grid.lastChild)
-          } 
-        }
-        obstaclePosition -= 10
-        if(isGameOver === false) {
-          fen += 0.008
-        }
-        if(isGameOver === false){
-            alert.innerHTML = '分数：' + fen.toFixed() + '分'
-        }
-        obstacle.style.left = obstaclePosition + 'px'
-      }, 20)
-      setTimeout(generateObstacles, randomTime)
+       let timerId = setInterval(function () {
+         if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
+           clearInterval(timerId)
+           if (fen > window.localStorage.getItem('bestScore')) {
+             alert.innerHTML = '游戏结束！新纪录：' + fen.toFixed() + '分'
+             window.localStorage.setItem('bestScore', fen)
+           }else {
+             alert.innerHTML = '游戏结束！分数：' + fen.toFixed() + '分'
+           }
+           isGameOver = true
+           while (grid.firstChild) {
+             grid.removeChild(grid.lastChild)
+           } 
+         }
+         obstaclePosition -= 3
+         if(isGameOver === false) {
+           fen += 0.008
+         }
+         if(isGameOver === false){
+             alert.innerHTML = '分数：' + fen.toFixed() + '分'
+         }
+         obstacle.style.left = obstaclePosition + 'px'
+       }, 10) // 移动速度
+       
+       if (!isGameOver) {
+           setTimeout(generateObstacles, randomTime)
+       }
     }
-  
-    }
-    generateObstacles()
+   }
 
-    // 修改横屏检测函数
-    function checkOrientation() {
-        if (window.innerWidth < 768) {  // 仅在移动设备上检查
-            if (window.innerHeight > window.innerWidth) {  // 竖屏
-                isGameOver = true;  // 暂停游戏
-                grid.style.display = 'none';  // 隐藏游戏区域
-            } else {  // 横屏
-                isGameOver = false;  // 恢复游戏
-                grid.style.display = 'block';  // 显示游戏区域
-                // 如果游戏还没开始，则开始生成障碍物
-                if (!document.querySelector('.obstacle')) {
-                    generateObstacles();
-                }
-            }
-        }
-    }
-
-    // 添加页面加载完成后的初始检查
-    document.addEventListener('DOMContentLoaded', () => {
-        // ... 原有的 DOMContentLoaded 代码 ...
-        
-        // 添加初始横竖屏检查
-        checkOrientation();
-        
-        // 添加屏幕旋转监听
-        window.addEventListener('orientationchange', checkOrientation);
-        window.addEventListener('resize', checkOrientation);
-    });
+   // 确保游戏开始时生成仙人掌
+   if (!isGameOver) {
+       generateObstacles();
+   }
 })
