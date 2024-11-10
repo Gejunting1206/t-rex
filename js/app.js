@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } 
         }
         obstaclePosition -= 10
-        if(isGameOver === false){{
+        if(isGameOver === false) {
           fen += 0.008
         }
         if(isGameOver === false){
