@@ -124,3 +124,38 @@ body {
   }
 }
 
+/* 添加游戏容器样式 */
+#game-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 修改竖屏模式样式 */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+  #game-container {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+  
+  #desert {
+    height: 150px;
+    background-size: auto 150px;
+  }
+  
+  .dino, .obstacle {
+    width: 45px;
+    height: 45px;
+    background-size: 45px 45px;
+  }
+}
+
+/* 删除之前的 orientation-message 相关样式 */
+
