@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
  
    function generateObstacles() {
     if (!isGameOver) {
-       let randomTime = Math.random() * 500 + 600
+       let randomTime = Math.random() * 400 + 800
     
     let obstaclePosition = grid.offsetWidth
       const obstacle = document.createElement('div')
@@ -85,15 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.removeChild(grid.lastChild)
           } 
         }
-        obstaclePosition -= 10
+        obstaclePosition -= 5
         if(isGameOver === false) {
-          fen += 0.008
+          fen += 0.005
         }
         if(isGameOver === false){
             alert.innerHTML = '分数：' + fen.toFixed() + '分'
         }
         obstacle.style.left = obstaclePosition + 'px'
-      }, 20)
+      }, 30)
       setTimeout(generateObstacles, randomTime)
     }
   
