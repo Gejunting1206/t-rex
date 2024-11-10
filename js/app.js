@@ -119,6 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // 监听屏幕旋转
     window.addEventListener('resize', checkOrientation);
     
-    // 初始检查
     checkOrientation();
 })
