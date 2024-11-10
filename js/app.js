@@ -86,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
           } 
         }
         obstaclePosition -= 10
-        fen += 0.008
+        if(isGameOver === false){{
+          fen += 0.008
+        }
         if(isGameOver === false){
             alert.innerHTML = '分数：' + fen.toFixed() + '分'
         }
