@@ -77,6 +77,19 @@ document.addEventListener('DOMContentLoaded', () => {
            speed += acceleration;
        }
    }
+    function check_is_app_or_pc() {
+        let str = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) ? 'app': 'pc';
+        var check = document.getElementById('check');
+        check.innerHTML = str;
+        if (str === 'app') {
+            var game = document.getElementById('game-container');
+            game.style.transform = 'rotate(90deg)';
+            generateObstacles();
+        }else{
+            generateObstacles();
+        }
+    }
+
 
    function generateObstacles() {
     if (!isGameOver) {
@@ -114,5 +127,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
    }
 
-   generateObstacles();
+   check_is_app_or_pc()
 })
