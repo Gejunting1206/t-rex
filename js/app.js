@@ -80,20 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function check_is_app_or_pc() {
         let str = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) ? 'app': 'pc';
         if (str === 'app') {
-            var game = document.getElementById('game-container');
-            game.style.position = 'absolute';
-            game.style.top = '50%';
-            game.style.left = '50%';
-            game.style.width = '100vh';
-            game.style.height = '100vw';
-            game.style.transform = 'translate(-50%, -50%) rotate(90deg)';
-            game.style.transformOrigin = 'center center';
-            
-            var desert = document.getElementById('desert');
-            desert.style.height = '150px';
-            desert.style.backgroundSize = 'auto 150px';
-            desert.style.marginTop = '0';
-            desert.style.marginBottom = '0';
             generateObstacles();
         } else {
             generateObstacles();

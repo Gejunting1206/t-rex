@@ -77,38 +77,43 @@ body {
     body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        width: 100vw;
-        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #game-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vh;
-        height: 100vw;
-        transform-origin: top left;
-        transform: rotate(90deg) translate(0, -100%);
+        width: 100%;
+        height: auto;
+        padding: 20px 0;
     }
 
     #desert {
-        height: 150px;
+        height: 120px;
         margin: 0;
-        background-size: auto 150px;
+        background-size: auto 120px;
+        max-width: 100%;
+    }
+
+    .dino, .obstacle {
+        width: 40px;
+        height: 40px;
+        background-size: 40px 40px;
     }
 
     .restart-btn {
-        transform: rotate(-90deg);
-        top: auto;
-        bottom: 20px;
-        left: 20px;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+
+    .restart-btn img {
+        width: 25px;
+        height: 25px;
     }
 
     #alert {
-        transform: rotate(-90deg) translateX(-50%);
-        white-space: nowrap;
-        top: 50%;
-        left: 40px;
+        font-size: 14px;
+        top: 15px;
     }
 }
