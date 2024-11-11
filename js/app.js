@@ -81,12 +81,19 @@ document.addEventListener('DOMContentLoaded', () => {
         let str = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) ? 'app': 'pc';
         if (str === 'app') {
             var game = document.getElementById('game-container');
-            game.style.transform = 'rotate(90deg)';
+            game.style.transform = 'rotate(90deg) translateY(-50%)';
+            game.style.transformOrigin = 'center center';
+            game.style.position = 'fixed';
+            game.style.top = '50%';
+            game.style.left = '0';
+            game.style.width = '100vh';
+            game.style.height = '100vw';
+            
             var desert = document.getElementById('desert');
             desert.style.height = '150px';
             desert.style.backgroundSize = 'auto 150px';
             generateObstacles();
-        }else{
+        } else {
             generateObstacles();
         }
     }
@@ -109,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
            if (fen > window.localStorage.getItem('bestScore')) {
              alert.innerHTML = '游戏结束！新纪录：' + fen.toFixed() + '分'
              window.localStorage.setItem('bestScore', fen)
-           }else {
+           } else {
              alert.innerHTML = '游戏结束！分数：' + fen.toFixed() + '分'
            }
            isGameOver = true
