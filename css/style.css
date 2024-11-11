@@ -72,3 +72,43 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #game-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vh;
+        height: 100vw;
+        transform-origin: top left;
+        transform: rotate(90deg) translate(0, -100%);
+    }
+
+    #desert {
+        height: 150px;
+        margin: 0;
+        background-size: auto 150px;
+    }
+
+    .restart-btn {
+        transform: rotate(-90deg);
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    #alert {
+        transform: rotate(-90deg) translateX(-50%);
+        white-space: nowrap;
+        top: 50%;
+        left: 40px;
+    }
+}
