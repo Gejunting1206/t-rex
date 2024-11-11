@@ -72,34 +72,3 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
-/* 添加移动端的响应式样式 */
-@media screen and (max-width: 768px) {
-    #desert {
-        height: 150px;  /* 减小游戏区域高度 */
-        margin: 0;
-        margin-top: 60px;  /* 为顶部按钮和分数留出空间 */
-    }
-    
-    .dino, .obstacle {
-        width: 40px;  /* 减小恐龙和障碍物尺寸 */
-        height: 40px;
-        background-size: 40px 40px;
-    }
-    
-    #alert {
-        top: 10px;  /* 调整分数显示位置 */
-        font-size: 14px;  /* 减小分数字体大小 */
-    }
-    
-    .restart-btn {
-        top: 10px;  /* 调整重启按钮位置 */
-        left: 10px;
-    }
-    
-    .restart-btn img {
-        width: 25px;  /* 减小重启按钮图标尺寸 */
-        height: 25px;
-    }
-}
-

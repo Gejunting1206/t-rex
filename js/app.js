@@ -82,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (str === 'app') {
             var game = document.getElementById('game-container');
             game.style.transform = 'rotate(90deg)';
+            var desert = document.getElementById('desert');
+            desert.style.height = '150px';
+            desert.style.backgroundSize = 'auto 150px';
             generateObstacles();
         }else{
             generateObstacles();
