@@ -81,10 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let str = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) ? 'app': 'pc';
         if (str === 'app') {
             var game = document.getElementById('game-container');
-            game.style.transform = 'rotate(-90deg)';
-            var desert = document.getElementById('desert');
-            desert.style.height = '150px';
-            desert.style.backgroundSize = 'auto 150px';
+            game.style.transform = 'rotate(90deg)';
+            game.style.height = '150px';
             generateObstacles();
         }else{
             generateObstacles();
