@@ -1,6 +1,7 @@
 body {
   overflow: hidden;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,51 +19,56 @@ body {
 #desert {
   position: relative;
   background-image: url(../images/t-rex-background.png);
-  height: 200px;
-  background-size: auto 200px;
+  height: 30vh;
+  background-size: auto 100%;
   width: 100%;
   max-width: 1000px;
   animation: sliderigth 600s infinite linear;
-  margin-top: auto;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .dino {
   background-image: url(../images/t-rex.png);
-  width: 60px;
-  height: 60px;
-  background-size: 60px 60px;
+  width: 8vh;
+  height: 8vh;
+  background-size: 100% 100%;
   position: absolute;
   bottom: 0;
 }
 
 .obstacle {
   background-image: url(../images/cacti.png);
-  width: 60px;
-  height: 60px;
-  background-size: 60px 60px;
+  width: 8vh;
+  height: 8vh;
+  background-size: 100% 100%;
   position: absolute;
   bottom: 0;
 }
 
 #alert {
   position: absolute;
-  top: 20px;
+  top: 2vh;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   z-index: 100;
+  font-size: 2.5vh;
 }
 
 .restart-btn {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 2vh;
+  left: 2vh;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 0;
   z-index: 1000;
+}
+
+.restart-btn img {
+  width: 5vh;
+  height: 5vh;
 }
 
 #game-container {
@@ -71,4 +77,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 横屏时的样式 */
+@media screen and (orientation: landscape) and (max-width: 768px) {
+    #game-container {
+        padding: 2vh 0;
+    }
+    
+    #desert {
+        height: 70vh;
+    }
 }
