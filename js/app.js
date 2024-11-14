@@ -29,25 +29,27 @@ document.addEventListener('DOMContentLoaded', () => {
    function jump() {
     isJumping = true
     let count = 0
+    let initialPosition = 0  // 记录初始位置
      let timerId = setInterval(function () {
-      if (count === 15 ) {
+      if (count === 25 ) {
         clearInterval(timerId)
         let downTimerId = setInterval(function () {
           if (count === 0) {
             clearInterval(downTimerId)
             isJumping = false
+            position = initialPosition  // 恢复到初始位置
           }
-          position -= 5
+          position -= 4
           count--
           position = position * gravity
           dino.style.bottom = position + 'px'
-        }, 20)
+        }, 15)
       }
-      position += 30
+      position += 25
       count++
       position = position * gravity
       dino.style.bottom = position + 'px'
-     },20)
+     },15)
    }
 
    document.addEventListener('contextmenu',function(e){
@@ -79,8 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
    }
     function check_is_app_or_pc() {
         let str = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) ? 'app': 'pc';
-        if (str === 'app') {
+        if (str === 'app ') {
             var game = document.getElementById('game-container');
+            game.style.transform = 'rotate(90deg)'
             generateObstacles();
         }else{
             generateObstacles();
@@ -99,7 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
        obstacle.style.left = obstaclePosition + 'px'
 
        let timerId = setInterval(function () {
-         if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60 ) {
+         const dinoLeft = parseInt(window.getComputedStyle(dino).left);
+         const dinoRight = dinoLeft + dino.offsetWidth;
+         const dinoBottom = parseInt(dino.style.bottom);
+         const obstacleLeft = obstaclePosition;
+         const obstacleRight = obstaclePosition + obstacle.offsetWidth;
+
+         if (
+           dinoRight > obstacleLeft && 
+           dinoLeft < obstacleRight && 
+           dinoBottom < obstacle.offsetHeight
+         ) {
            clearInterval(timerId)
            clearInterval(scoreInterval)
            if (fen > window.localStorage.getItem('bestScore')) {

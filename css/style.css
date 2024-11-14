@@ -19,56 +19,61 @@ body {
 #desert {
   position: relative;
   background-image: url(../images/t-rex-background.png);
-  height: 30vh;
-  background-size: auto 100%;
+  height: 250px;
+  background-size: auto 250px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   animation: sliderigth 600s infinite linear;
-  margin: 0;
+  margin-top: auto;
+  margin-bottom: 20px;
 }
 
 .dino {
   background-image: url(../images/t-rex.png);
-  width: 8vh;
-  height: 8vh;
-  background-size: 100% 100%;
+  width: 60px;
+  height: 60px;
+  background-size: 60px 60px;
   position: absolute;
   bottom: 0;
+  left: 20%;
 }
 
 .obstacle {
   background-image: url(../images/cacti.png);
-  width: 8vh;
-  height: 8vh;
-  background-size: 100% 100%;
+  width: 60px;
+  height: 60px;
+  background-size: 60px 60px;
   position: absolute;
   bottom: 0;
 }
 
 #alert {
   position: absolute;
-  top: 2vh;
+  top: 30px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   z-index: 100;
-  font-size: 2.5vh;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
 .restart-btn {
   position: fixed;
-  top: 2vh;
-  left: 2vh;
+  top: 30px;
+  left: 30px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   z-index: 1000;
+  width: 40px;
+  height: 40px;
 }
 
 .restart-btn img {
-  width: 5vh;
-  height: 5vh;
+  width: 100%;
+  height: 100%;
 }
 
 #game-container {
@@ -81,13 +86,17 @@ body {
   position: relative;
 }
 
-/* 横屏时的样式 */
-@media screen and (orientation: landscape) and (max-width: 768px) {
-    #game-container {
-        padding: 2vh 0;
-    }
-    
+@media screen and (max-width: 768px) {
     #desert {
-        height: 70vh;
+        height: 180px;
+        background-size: auto 180px;
+        margin: 0;
+    }
+
+    .dino, .obstacle {
+        width: 45px;
+        height: 45px;
+        background-size: 45px 45px;
+        left: 20%;
     }
 }
