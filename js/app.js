@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
    function jump() {
     isJumping = true
     let count = 0
-    let initialPosition = 0  // 记录初始位置
-     let timerId = setInterval(function () {
+    let initialPosition = position
+    let timerId = setInterval(function () {
       if (count === 25 ) {
         clearInterval(timerId)
         let downTimerId = setInterval(function () {
           if (count === 0) {
             clearInterval(downTimerId)
             isJumping = false
-            position = initialPosition  // 恢复到初始位置
+            position = initialPosition
           }
           position -= 4
           count--
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       count++
       position = position * gravity
       dino.style.bottom = position + 'px'
-     },15)
+    },15)
    }
 
    document.addEventListener('contextmenu',function(e){
@@ -102,16 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
        obstacle.style.left = obstaclePosition + 'px'
 
        let timerId = setInterval(function () {
-         const dinoLeft = parseInt(window.getComputedStyle(dino).left);
-         const dinoRight = dinoLeft + dino.offsetWidth;
-         const dinoBottom = parseInt(dino.style.bottom);
-         const obstacleLeft = obstaclePosition;
-         const obstacleRight = obstaclePosition + obstacle.offsetWidth;
+         const dinoRect = dino.getBoundingClientRect();
+         const obstacleRect = obstacle.getBoundingClientRect();
 
          if (
-           dinoRight > obstacleLeft && 
-           dinoLeft < obstacleRight && 
-           dinoBottom < obstacle.offsetHeight
+           dinoRect.right > obstacleRect.left && 
+           dinoRect.left < obstacleRect.right && 
+           dinoRect.bottom > obstacleRect.top &&
+           dinoRect.top < obstacleRect.bottom
          ) {
            clearInterval(timerId)
            clearInterval(scoreInterval)
